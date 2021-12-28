@@ -1,0 +1,20 @@
+
+.map{
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    min-width: 600px;
+    max-width: 600px;
+    background-color: rgb(3, 3, 36);
+}
+
+.tile{
+    width: 30px;
+    height: 30px;
+    background-color: rgb(3, 3 ,36);
+    box-sizing: border-box;
+}
+
+.block{
+    /* box-shadow: inset 0px 0px 15px 1px blue; */
+    border: 1px solid blue;
+}
