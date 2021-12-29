@@ -1,38 +1,153 @@
-
 let mapDiv = document.getElementById('map');
-const map = [
-    '11111111111111111111',
-    '10000000011000000001',
-    '10110111011011101101',
-    '10110111011011101101',
-    '10000000000000000001',
-    '10110101111110101101',
-    '10000100011000100001',
-    '11110111011011101111',
-    '00010100000000101000',
-    '00010101000010101000',
-    '11110101000010101111',
-    '10000001000010000001',
-    '11110101000010101111',
-    '00010101111110101000',
-    '00010100000000101000',
-    '11110111011011101111',
-    '10000100011000100001',
-    '10110101111110101101',
-    '10000000000000000001',
-    '10110111011011101101',
-    '10110111011011101101',
-    '10000000011000000001',
-    '11111111111111111111',
-];
+const map = {
+    'board': [
+        'BBBBBBBBBBBBBBBBBBBB',
+        'BFFFFFFFFBBFFFFFFFFB',
+        'BFBBFBBBFBBFBBBFBBFB',
+        'BFBBFBBBFBBFBBBFBBFB',
+        'BFFFFFFFFFFFFFFFFFFB',
+        'BFBBFBFBBBBBBFBFBBFB',
+        'BFFFFBFFFBBFFFBFFFFB',
+        'BBBBFBBBFBBFBBBFBBBB',
+        'EEEBFBFFFFFFFFBFBEEE',
+        'EEEBFBFBEEEEBFBFBEEE',
+        'BBBBFBFBEEEEBFBFBBBB',
+        'BFFFFFFBEEEEBFFFFFFB',
+        'BBBBFBFBEEEEBFBFBBBB',
+        'EEEBFBFBBBBBBFBFBEEE',
+        'EEEBFBFFFFFFFFBFBEEE',
+        'BBBBFBBBFBBFBBBFBBBB',
+        'BFFFFBFFFBBFFFBFFFFB',
+        'BFBBFBFBBBBBBFBFBBFB',
+        'BFFFFFFFFFFFFFFFFFFB',
+        'BFBBFBBBFBBFBBBFBBFB',
+        'BFBBFBBBFBBFBBBFBBFB',
+        'BFFFFFFFFBBFFFFFFFFB',
+        'BBBBBBBBBBBBBBBBBBBB',
+    ],
+    'pacmanPosition':{
+        type : 'pacman',
+        img : 'images/pacman.png',
+        row : 18,
+        column : 9
+    },
+    'food':{
+        type: 'food',
+        img: 'images/food.svg',
+        column: 0,
+        row: 0
+    },
+    'ghostsData':[
+        {
+            type : 'ghost',
+            img : 'images/ghost-blue.png',
+            row : 11,
+            column: 9
+        },
+        {
+            type : 'ghost',
+            img : 'images/ghost-green.png',
+            row : 12,
+            column: 10
+        },
+        {
+            type : 'ghost',
+            img : 'images/ghost-purple.png',
+            row : 11,
+            column: 10
+        },
+        {
+            type : 'ghost',
+            img : 'images/ghost-red.png',
+            row : 12,
+            column: 9
+        },
+    ]
+}
 
-for (let i = 0; i < 23; i++) {
-    for (let j = 0; j < 20; j++) {
-        let tile = document.createElement('div');
-        let className = 'tile';
-        if (map[i][j] == '1')
-            className += ' block';
-        tile.className = className;
-        mapDiv.appendChild(tile);
+class Board{
+    board;
+    constructor(map){
+        this.generateMap(map);
+        this.putPacman(map['pacmanPosition']);
+        this.putGhosts(map['ghostsData']);
+    }
+    generateMap(map){
+        let boardData = map['board'];
+        let rows = boardData.length;
+        let columns = boardData[0].length;
+        this.board = new Array(rows);
+        for (let i = 0; i < rows; i++) {
+            this.board[i] = new Array(columns);
+            for (let j = 0; j < columns; j++) {
+                let tile = new Tile(boardData[i][j]=='B'? 'block':'empty');
+                if(boardData[i][j]=='F'){
+                    let food = new GameObject(map['food']);
+                    tile.put(food.htmlElement);
+                }
+                this.board[i][j] = tile;
+                mapDiv.appendChild(tile.htmlElement);
+            }
+        }
+    }
+    putPacman(pacmanData){
+        let row = pacmanData.row, column = pacmanData.column;
+        let pacman = new GameObject(pacmanData);
+        this.board[row][column].put(pacman.htmlElement);
+    }
+    putGhosts(ghostsData){
+        for(let ghostData of ghostsData){
+            let row = ghostData.row, column = ghostData.column;
+            let ghost = new GameObject(ghostData);
+            this.board[row][column].put(ghost.htmlElement);
+        }
     }
 }
+
+class Tile{
+    coordinates;
+    content;
+    htmlElement;
+    styleClasses = {
+        'empty':'tile',
+        'occupied': 'tile occupied',
+        'block':'tile block',
+    }
+    constructor (type){
+        this.htmlElement = document.createElement('div');
+        this.htmlElement.className = this.styleClasses[type];
+    }
+    put(element){
+        if(this.htmlElement.firstChild)
+            this.htmlElement.removeChild(this.htmlElement.firstChild);
+        this.htmlElement.appendChild(element);
+        this.htmlElement.className = this.styleClasses['occupied'];
+    }
+    containsBlock(){
+        return this.content == 'B';
+    }
+    isEmpty(){
+        return this.content == 'E';
+    }
+    containsFood(){
+        return this.content == 'F';
+    }  
+}
+
+class GameObject{
+    htmlElement;
+    column;
+    row;
+    type;
+    constructor(objectData){
+        this.type = objectData.type;
+        this.column = objectData.column;
+        this.row = objectData.row;
+        this.htmlElement = document.createElement('img');
+        this.htmlElement.src = objectData.img;
+        this.htmlElement.className = objectData.type;
+    }
+}
+let board = new Board(map);
+
+
