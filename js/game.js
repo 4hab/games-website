@@ -1,61 +1,49 @@
-
 import { Board } from "./board.js";
-import {Position} from "./position.js";
+import { Data } from "./data.js";
 
 class Game {
-    #board;
-    #score;
-    #interval;
-    map =[
-        'BBBBBBBBBBBBBBBBBBBB',
-        'BFFFFFFFFBBFFFFFFFFB',
-        'BFBBFBBBFBBFBBBFBBFB',
-        'BFBBFBBBFBBFBBBFBBFB',
-        'BFFFFFFFFFFFFFFFFFFB',
-        'BFBBFBFBBBBBBFBFBBFB',
-        'BFFFFBFFFBBFFFBFFFFB',
-        'BBBBFBBBFBBFBBBFBBBB',
-        'EEEBFBFFFFFFFFBFBEEE',
-        'EEEBFBFBEEEEBFBFBEEE',
-        'BBBBFBFBEEEEBFBFBBBB',
-        'BFFFFFFBEGGEBFFFFFFB',
-        'BBBBFBFBEGGEBFBFBBBB',
-        'EEEBFBFBBBBBBFBFBEEE',
-        'EEEBFBFFFFFFFFBFBEEE',
-        'BBBBFBBBFBBFBBBFBBBB',
-        'BFFFFBFFFBBFFFBFFFFB',
-        'BFBBFBFBBBBBBFBFBBFB',
-        'BFFFFFFFFPFFFFFFFFFB',
-        'BFBBFBBBFBBFBBBFBBFB',
-        'BFBBFBBBFBBFBBBFBBFB',
-        'BFFFFFFFFBBFFFFFFFFB',
-        'BBBBBBBBBBBBBBBBBBBB',
-    ];
-
-    constructor() {
-        this.#board = new Board(this.map);
+    static #instance;
+    static getInstance(){
+        return this.#instance = this.#instance? this.#instance: new Game();
     }
 
-    start() {
-        // this.#interval = setInterval(function () {
-        //     //move ghosts
-        //     console.log('moving ghosts');
+    board;
+    #interval;
+    #food;
+    #playing;
+    updateScore(){
+        this.#food--;
+        if(this.#food == 0){
+            console.log('winner');
+        }
+    }
+    constructor() {
+        this.board = Board.getInstance();
+        this.#food = Data.winnerScore;
+        this.#interval = false;
+    }
+    play() {
+        // this.#playing = true;
+        // this.#interval = setInterval(function (){
+        //     this.board.moveGhosts(this.#board.ghosts)
         // }, 500);
     }
-
-    play() {
-
-    }
     pause() {
-
+        clearInterval(this.#interval);
+        this.#playing = false;
     }
 
-    move(direction) {
-        console.log(direction);
-        let position = this.#board.getPacman().coordinates;
-        let newPosition = Position.copy(position);
-        newPosition.update(direction);
-        this.#board.makeMove(position, newPosition);
+    move(arrow) {
+        if(arrow == 'ArrowLeft' || arrow == 'ArrowRight' || arrow == 'ArrowUp' || arrow == 'ArrowDown' ){
+            if(!this.#playing){
+                this.play();
+            }
+            this.board.movePacman(arrow);
+        }
+        else if(arrow == 'Escape'){
+            this.pause();
+        }
+        console.log(arrow);
     }
 
 }

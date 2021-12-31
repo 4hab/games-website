@@ -1,61 +1,67 @@
+import { Data } from "./data.js";
+import { Game } from "./game.js";
+import { GameObject } from "./game_object.js";
+
+
 class Tile {
-    gameObject;
     htmlElement;
     type;
-    containsFood;
-    constructor(type, gameObject) {
-        this.gameObject = gameObject;
-        this.type = type;
-        this.containsFood = this.type == 'food';
+    position;
+    constructor(typeCode, position) {
+        this.position = position;
+        this.type = Data.types['tile'][typeCode];
+        this.objects = [];
         this.htmlElement = document.createElement('div');
-        this.htmlElement.className = type;
-        if (this.gameObject) {
+        this.htmlElement.className = this.type;
+    }
+    #getTopObject() {
+        return this.objects[this.objects.length - 1];
+    }
+    #update() {
+        let gameObject = this.#getTopObject();
+        this.htmlElement.innerHTML = '';
+        if (gameObject) {
             this.htmlElement.appendChild(gameObject.htmlElement);
         }
     }
-    #update() {
-        if(this.gameObject){
-            this.type = this.gameObject;
-        }
-        // if (this.gameObject) {
-        //     this.type = this.gameObject.type;
-        // } else {
-        //     this.type = this.containsFood ? 'food' : 'empty';
-        // }
-        // this.htmlElement.className = this.type;
-    }
-
     isBlocked() {
         return this.type == 'block';
     }
-
-    #putPacman(pacman){
-        if(this.gameObject.type == 'ghost'){
-            return false;
+    put(gameObject) {
+        this.objects.push(gameObject);
+        if (gameObject.isPacman() && this.#contains('food')) {
+            this.#removeFood();
+            let game = Game.getInstance();
+            game.updateScore();
         }
-        this.gameObject = pacman;
-
-
-    }
-    #putGhost(ghost){
-        
-    }
-    put(newObject) {
-        if (this.isBlocked())
-            return false;
-        if(newObject.type == 'pacman'){
-            this.#putPacman(newObject);
-        }
-        else if(newObject.type == 'ghost'){
-            this.#putGhost(newObject);
-        }
-    }
-    clear() {
-        delete this.gameObject;
-        this.htmlElement.innerHTML = '';
         this.#update();
     }
-
+    #contains(type){
+        for(let object of this.objects){
+            if(object.type == type){
+                return true;
+            }
+        }
+        return false;
+    }
+    remove(gameObject) {
+        for (let i = 0; i < this.objects.length; i++) {
+            if (this.objects[i] == gameObject) {
+                this.objects.splice(i, 1);
+                break;
+            }
+        }
+        this.#update();
+    }
+    #removeFood(){
+        for (let i = 0; i < this.objects.length; i++) {
+            if (this.objects[i].isFood()) {
+                this.objects.splice(i, 1);
+                break;
+            }
+        }
+        this.#update();
+    }
 }
 
 export { Tile };

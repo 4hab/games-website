@@ -1,83 +1,98 @@
 import { Tile } from "./tile.js";
-import {Position} from './position.js';
+import { Position } from './position.js';
+import { Data } from "./data.js";
 import { GameObject } from "./game_object.js";
+
 
 class Board {
 
-    #types;
+    static #instance;
     #board;
     #boardDiv
-    #imgs;
     #pacman;
-    #ghosts;
-    constructor(map) {
-        this.#boardDiv = document.getElementById('board');
-        this.#types = {
-            'E': 'empty',
-            'F': 'food',
-            'B': 'block',
-            'P': 'pacman',
-            'G': 'ghost'
+    ghosts;
+    static getInstance() {
+        if (this.#instance) {
+            return this.#instance;
         }
-        this.#imgs = {
-            'pacman': 'images/pacman.png',
-            'ghost': 'images/ghost.png',
-            'food': 'images/food.svg'
+        else {
+            return new Board();
         }
-        this.#ghosts = new Array(0);
-        this.#generateBoard(map);
     }
-
-    #generateBoard(map) {
+    constructor() {
+        this.#boardDiv = document.getElementById('board');
+        this.ghosts = [];
+        this.#generateBoard();
+    }
+    #generateBoard() {
+        let map = Data.map;
         let rows = map.length, columns = map[0].length;
         this.#board = new Array(rows);
         for (let r = 0; r < rows; r++) {
             this.#board[r] = new Array(columns);
             for (let c = 0; c < columns; c++) {
-                let coordinates = new Position(r, c);
-                let tile = this.#generateTile(map[r][c], coordinates);
-                this.#boardDiv.appendChild(tile.htmlElement);
-                this.#board[r][c] = tile;
+                this.#newTile(map[r][c], r, c);
             }
         }
+        this.#addObjects();
     }
-
-    #generateTile(typeKey, coordinates) {
-        let type = this.#types[typeKey];
-        let gameObject;
-        if (type == 'ghost' || type == 'pacman' || type == 'food') {
-            gameObject = new GameObject(type, coordinates, this.#imgs[type]);
-            if (type == 'ghost') {
-                this.#ghosts.push(gameObject);
-            }
-            else if (type == 'pacman') {
+    #addObjects() {
+        let objectsData = Data.objects;
+        for (let objectData of objectsData) {
+            let gameObject = new GameObject(objectData);
+            if (gameObject.isPacman()) {
                 this.#pacman = gameObject;
+            } else if (gameObject.isGhost()) {
+                this.ghosts.push(gameObject);
             }
+            let position = gameObject.position;
+            let tile = this.getTile(position);
+            tile.put(gameObject);
         }
-        return new Tile(type, gameObject);
+    }
+    #newTile(code, row, column) {
+        let position = new Position(row, column);
+        let tile = new Tile(code, position);
+        this.#boardDiv.appendChild(tile.htmlElement);
+        this.#board[row][column] = tile;
+        if (code == 'F') {
+            let food = new GameObject(Data.foodData);
+            tile.put(food);
+        }
+    }
+    getTile(position) {
+        return this.#board[position.row][position.column];
+    }
+    moveObject(object, arrow) {
+        let newPosition = Position.copy(object.position);
+        newPosition.update(arrow);
+        let currentTile = this.getTile(object.position);
+        let newTile = this.getTile(newPosition);
+        if (newTile.isBlocked()) {
+            // console.log('block');
+            return object.position;
+        }
+        currentTile.remove(object);
+        newTile.put(object);
+        return newPosition;
+    }
+    movePacman(arrow) {
+        this.#pacman.position = this.moveObject(this.#pacman, arrow);
     }
 
-    getPacman(){
-        return this.#pacman;
-    }
-
-    getGhosts(){
-        return this.#ghosts;
-    }
-
-    getTile(coordinates) {
-        return this.#board[coordinates.row][coordinates.column];
-    }
-
-    makeMove(from, to) {
-        let source = this.getTile(from);
-        let destination = this.getTile(to);
-        let result = destination.put(source.gameObject);
-        if(result)
-            source.clear();
-        console.log(source);
-        console.log(destination);
+    moveGhosts(ghosts) {
+        let arrows = [
+            'ArrowLeft',
+            'ArrowRight',
+            'ArrowUp',
+            'ArrowDown'
+        ];
+        ghosts.forEach(ghost => {
+            let direction = Math.floor(Math.random() * 10) % 4;
+            let arrow = arrows[direction];
+            ghost.position = this.moveObject(ghost, arrow);
+        });
     }
 }
 
-export {Board};
+export { Board };

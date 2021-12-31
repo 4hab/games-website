@@ -11,7 +11,7 @@ body{
     /* border: 4px solid rgb(2, 4, 139); */
 }
 
-.tile{
+.empty{
     width: 30px;
     height: 30px;
     background-color: rgb(3, 3 ,36);
@@ -24,11 +24,17 @@ body{
     border: 1px solid rgb(2, 4, 139);
     box-sizing: border-box;
 }
-.pacman, .ghost{
+.pacman{
     width: 85%;
+    /* transform: scaleX(-1); */
+    /* transform: scaleX(1); */
+    /* padding: 1px 4px; */
+}
+.ghost{
+    width: 95%;
 }
 
 .food{
-    padding: 18% 30%;
-    width: 40%;
+    padding: 40% 40%;
+    width: 20%;
 }
