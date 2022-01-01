@@ -29,9 +29,10 @@ function play() {
             gameOver();
             return;
         }
-        // game.board.moveGhosts();
+        game.board.moveGhosts();
     }, 200);
 }
+
 
 function pause() {
     playing = false;
