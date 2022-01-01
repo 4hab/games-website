@@ -6,14 +6,18 @@ class Game {
     static getInstance(){
         return this.#instance = this.#instance? this.#instance: new Game();
     }
-
+    static newGame(){
+        return this.#instance = new Game();
+    }
     board;
     #food;
     over;
+    winner;
     updateScore(){
         this.#food--;
         if(this.#food == 0){
-            console.log('winner');
+            this.winner =true;
+            this.gameOver();
         }
     }
     constructor() {
@@ -27,9 +31,13 @@ class Game {
     }
     gameOver(){
         this.over = true;
-        let audio = new Audio('./sounds/death.wav');
+        let audio;
+        if(this.winner){
+            audio = new Audio('./sounds/game_start.wav');
+        } else{
+            audio = new Audio('./sounds/death.wav');
+        }
         audio.play();
-        console.log('gameOver');
     }
 }
 export { Game };

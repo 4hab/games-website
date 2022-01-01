@@ -43,15 +43,9 @@ class GameObject {
         this.htmlElement.className = this.type;
     }
 
-    moveTo(direction) {
-        let newPosition = Position.copy(this.position);
-        newPosition.update(direction);
-
-
-    }
-
-    #updateStyle(direction){
-        this.htmlElement.style = styles[direction];
+    updateStyle(direction){
+        this.htmlElement.className = styles[direction];
+        // console.log(styles[direction]);
     }
 
     isPacman(){

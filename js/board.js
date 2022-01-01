@@ -74,6 +74,7 @@ class Board {
     movePacman(arrow) {
         this.#pacman.position = this.moveObject(this.#pacman, arrow);
         this.#check(this.#pacman.position);
+        this.#pacman.updateStyle(arrow);
     }
 
     #check(position){
