@@ -2,6 +2,7 @@ import { Tile } from "./tile.js";
 import { Position } from './position.js';
 import { Data } from "./data.js";
 import { GameObject } from "./game_object.js";
+import { Game } from "./game.js";
 
 
 class Board {
@@ -12,12 +13,7 @@ class Board {
     #pacman;
     ghosts;
     static getInstance() {
-        if (this.#instance) {
-            return this.#instance;
-        }
-        else {
-            return new Board();
-        }
+        return this.#instance = this.#instance? this.#instance : new Board();
     }
     constructor() {
         this.#boardDiv = document.getElementById('board');
@@ -69,7 +65,6 @@ class Board {
         let currentTile = this.getTile(object.position);
         let newTile = this.getTile(newPosition);
         if (newTile.isBlocked()) {
-            // console.log('block');
             return object.position;
         }
         currentTile.remove(object);
@@ -78,19 +73,28 @@ class Board {
     }
     movePacman(arrow) {
         this.#pacman.position = this.moveObject(this.#pacman, arrow);
+        this.#check(this.#pacman.position);
     }
 
-    moveGhosts(ghosts) {
+    #check(position){
+        let tile = this.getTile(position);
+        if(tile.contains('pacman') && tile.contains('ghost')){
+            let game = Game.getInstance();
+            game.gameOver();
+        }
+    }
+    moveGhosts() {
         let arrows = [
             'ArrowLeft',
             'ArrowRight',
             'ArrowUp',
             'ArrowDown'
         ];
-        ghosts.forEach(ghost => {
-            let direction = Math.floor(Math.random() * 10) % 4;
-            let arrow = arrows[direction];
+        this.ghosts.forEach(ghost => {
+            // let direction = Math.floor(Math.random() * 10) % 4;
+            let arrow = ghost.getDirection();
             ghost.position = this.moveObject(ghost, arrow);
+            this.#check(ghost.position);
         });
     }
 }

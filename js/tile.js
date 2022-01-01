@@ -29,14 +29,14 @@ class Tile {
     }
     put(gameObject) {
         this.objects.push(gameObject);
-        if (gameObject.isPacman() && this.#contains('food')) {
+        if (gameObject.isPacman() && this.contains('food')) {
             this.#removeFood();
             let game = Game.getInstance();
             game.updateScore();
         }
         this.#update();
     }
-    #contains(type){
+    contains(type){
         for(let object of this.objects){
             if(object.type == type){
                 return true;

@@ -8,9 +8,8 @@ class Game {
     }
 
     board;
-    #interval;
     #food;
-    #playing;
+    over;
     updateScore(){
         this.#food--;
         if(this.#food == 0){
@@ -20,32 +19,17 @@ class Game {
     constructor() {
         this.board = Board.getInstance();
         this.#food = Data.winnerScore;
-        this.#interval = false;
+        this.over = false;
     }
-    play() {
-        // this.#playing = true;
-        // this.#interval = setInterval(function (){
-        //     this.board.moveGhosts(this.#board.ghosts)
-        // }, 500);
-    }
-    pause() {
-        clearInterval(this.#interval);
-        this.#playing = false;
-    }
-
     move(arrow) {
-        if(arrow == 'ArrowLeft' || arrow == 'ArrowRight' || arrow == 'ArrowUp' || arrow == 'ArrowDown' ){
-            if(!this.#playing){
-                this.play();
-            }
-            this.board.movePacman(arrow);
-        }
-        else if(arrow == 'Escape'){
-            this.pause();
-        }
+        this.board.movePacman(arrow);
         console.log(arrow);
     }
-
+    gameOver(){
+        this.over = true;
+        let audio = new Audio('./sounds/death.wav');
+        audio.play();
+        console.log('gameOver');
+    }
 }
-
 export { Game };
