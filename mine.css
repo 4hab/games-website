@@ -113,6 +113,12 @@ body{
     font-weight: bold;
     display: block;
 }
+
+.result-menue h1{
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    box-shadow: none;
+}
 select:hover{
     cursor: pointer;
 }

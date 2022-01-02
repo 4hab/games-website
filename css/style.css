@@ -217,7 +217,7 @@ a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 2s;
+    transition: all 1s;
 }
 .games .container div:hover{
     transform:  scale(1.2);
@@ -229,6 +229,18 @@ a:hover{
     border: 1px solid rgb(3, 3, 68);
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.game-card{
+    position:relative;
+}
+.coming-soon{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    height: 100px;
 }
 /* End Games */
 /* Start About */
@@ -315,3 +327,4 @@ a:hover{
     font-weight: bold;
 }
 /* End footer */
+
