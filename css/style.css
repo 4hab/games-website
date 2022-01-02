@@ -1,0 +1,312 @@
+/*  Start variables */
+:root{
+    --mainColor:#10cab7;
+    --secondary-color:#2c4755; 
+    --section-padding:60px;
+    --section-background:#f6f6f6;
+}
+/*  End variables */
+/*  start global css */
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+.container{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left:auto ;
+    margin-right:auto ;
+}
+
+/*  end global css */
+
+/* Start nav */
+nav{
+    background:rgb(14, 14, 40);
+}
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0 30px;
+}
+a{
+    color:white;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+.menu li{
+    font-size: 20px;
+    padding: 15px 20px;
+}
+.menu li a{
+    display: block;
+}
+.logo a{
+    font-size: 25px;
+    text-decoration: none;
+}
+.button.secondary{
+    border-bottom:1px solid white ;
+}
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.toggle{
+    order: 1;
+}
+.item.button{
+    order: 2;
+}
+.item{
+    width: 100%;
+    text-align: center;
+    order: 3;
+    display:none ;
+}
+.item.active{
+    display: block;
+}
+.toggle{
+    cursor: pointer;
+}
+.bars{
+    background: white;
+    display: inline-block;
+    height: 2px;
+    position: relative;
+    width: 15px;
+}
+.bars::after,.bars::before{
+    background: white;
+    content: "";
+    display: inline-block;
+    height: 2px;
+    width: 15px;
+    position:absolute;
+}
+.bars::before{
+    top: 5px;
+}
+.bars::after{
+    top: -5px;
+}
+@media all and (min-width:468px){
+    .menu{
+        justify-content: center;
+    }
+    .logo{
+        flex:1;
+        text-decoration: none;
+    }
+    .item.button{
+        width: auto;
+        order: 1;
+        display: block;
+    }
+    .toggle{
+        order: 2;
+    }
+    .button.secondary{
+        border: 0;
+    }
+    .button a{
+        text-decoration: none;
+        padding: 7px 15px;
+        background:rgb(32, 32, 248);
+        border: 2px solid white;
+        border-radius: 50em;
+    }
+    .button.secondary a{
+        background: transparent;
+    }
+    .button a:hover{
+        transition: all 0.25s;
+    }
+    .button:not(.secondary) a:hover{
+        
+        background:white;
+    color:  blue;
+    }
+    .button.secondary a:hover{
+        background:white;
+        color:  blue;
+    }
+}
+@media all and (min-width:768px){
+    .item{
+        display: block;
+        width: auto;
+    }
+    .toggle{
+        display: none;
+    }
+    .logo{
+        order: 0;
+    }
+    .item{
+        order: 1;
+    }
+    .button{
+        order: 2;
+    }
+    .menu li{
+        padding:15px 10px ;
+    }
+    .menu li.button{
+        padding-right: 0;
+    }
+}
+/* End nav */
+/* Start Landing */
+.landing{
+    background-image: url("../Images/pic1.jpg");
+    background-size: cover;
+    height: calc(100vh - 64px);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.landing .intro-text{
+    text-align: center;
+    width:fit-content;
+    /* padding: 30px; */
+    max-width: 100%;
+}
+.landing .intro-text h1{
+    margin: 0;
+    padding: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 100px;
+    color: rgb(3, 3, 68);
+    background: rgba(255, 255, 255, 0.548);
+}
+/* End landig */
+/* Start Games */
+.games {
+    padding: 40px;
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center;
+     
+    
+}
+.games h1{
+    width: 100%;
+    text-align: center;
+}
+.games .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+  }
+  .games .container div{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 2s;
+}
+.games .container div:hover{
+    transform:  scale(1.2);
+}
+.games .image{
+    width: 250px;
+    height: 250px;
+    border: 1px solid rgb(3, 3, 68);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/* End Games */
+/* Start About */
+#about{
+    background: rgb(14, 14, 40);
+    color: white;
+    width: calc( 100% - 40px);
+    padding: 50px 20px;
+    /* padding-top: 50px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#about div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+#about div h2{
+
+    font-size: 40px;
+}
+#about div p{
+   text-align: center;
+    width: 50%;
+}
+/* End About */
+/* Start Feedback */
+#feedback{
+    font-size: 40px;
+    width: calc( 100% - 40px);
+    padding: 10px 20px;
+    padding-top: 50px;
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feedback{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; 
+    align-items: center;  
+    padding: 10px 20px;
+    padding-bottom:90px ;
+}
+.feedback div{
+    width: 350px;
+    padding: 15px;
+    margin: 10px;
+    background: #eee;
+   
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.feedback div h2{
+    margin: 0;
+    color: rgba(0, 0, 0, 0.541);
+}
+
+/* End Feedback */
+/* Start footer */
+.footer{
+    padding-top:  calc(var(--section-padding) + 20px );
+    padding-bottom: calc(var(--section-padding) + 20px );
+    background-color:rgb(14, 14, 40);
+}
+.footer .text{
+    color: white;
+    text-align: center;
+    font-size: 30px;
+}
+.footer .text span{
+    color: rgb(32, 32, 248);
+    font-weight: bold;
+}
+/* End footer */
