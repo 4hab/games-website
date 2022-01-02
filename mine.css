@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;400;500;600;700&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(24, 34, 46);
+    font-family: 'Encode Sans', sans-serif;
+    
+}
+.board-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(174, 187, 255);
+}
+.board-head h2{
+    margin: 0;
+    padding-right: 10px;
+    font-size: 1em;
+}
+.control-panel{
+    background-color: rgb(23, 32, 83);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 150px;
+}
+.control-btn{
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    padding:10px 0;
+    transition: ease, 300ms;
+}
+.control-btn img{
+    height: 80%;
+}
+
+.bomb-counter-container{
+    display: flex;
+    align-items: center;
+    color: rgb(145, 0, 0);
+    justify-content: center;
+}
+.bomb-counter-container img{
+    width: 20px;
+    margin-right: 5px;
+}
+.bomb-counter-container span{
+    font-weight: bold;
+    font-size: 1em;
+}
+.control-btn:hover{
+    cursor: pointer;
+    background-color: rgb(255, 255, 255, .1);
+}
+
+.game-container{
+    margin: 20px auto;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    overflow: hidden;
+    box-shadow: rgba(255, 255, 255, 0.15) 0px 48px 100px 0px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+.main-menue{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.247);
+    color: white;
+    min-width: 800px;
+}
+.main-menue h1{
+    margin: 0;
+    font-size: 4em;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: rgba(36, 24, 104, 0.726);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.main-menue select{
+    margin: 20px auto;
+    background-color: rgb(23, 32, 83);
+    color: rgb(219, 219, 219);
+    padding: 8px 25px;
+    font-size: 1em;
+    border: none;
+}
+.continue-btn{
+    display: none;
+}
+.pause-menue .continue-btn:hover{
+    cursor: pointer;
+    color: rgb(24, 34, 46);
+    transition: linear 500ms;
+}
+.pause-menue .continue-btn{
+    margin-top: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    display: block;
+}
+select:hover{
+    cursor: pointer;
+}
+.new-game-btn{
+    display: inline-block;
+    background-color: rgb(145, 0, 0);
+    padding: 15px 40px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+                rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 5px;
+}
+
+.new-game-btn:hover{
+    cursor: pointer;
+    background-color: rgb(175, 14, 14);
+    font-weight: bold;
+}
+.board{
+    display: grid;
+    justify-content: start;
+}
+.tile{
+    width: 33px;
+    padding-top: 33px;
+    color: rgb(75, 75, 212);
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    
+}
+.tile:hover{
+    opacity: 0.8;
+}
