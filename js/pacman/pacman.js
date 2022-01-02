@@ -1,4 +1,4 @@
-import { Game } from "./js/game.js";
+import { Game } from "./game.js";
 
 let game = Game.getInstance();
 let interval;

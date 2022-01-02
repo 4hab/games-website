@@ -1,4 +1,4 @@
-import { Tile, Coordinates } from './tile.js';
+import { Tile, Coordinates } from './mine-tile.js';
 let levels = {
     'easy': {
         'columns': 10,
