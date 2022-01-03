@@ -20,6 +20,8 @@ The game is about finding all bombs hidden in the board following the numbers on
 
 
 ## screenshots
+**Watch the video for the website** [**here**](https://drive.google.com/file/d/1riX8Z257ruejn8X_18_DezJxH_88USnP/view?usp=sharing)
+
 <img src='images/home-screenshot.png' width='50%'/>
 <img src='images/games.png'/>
 
