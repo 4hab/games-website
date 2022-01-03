@@ -93,10 +93,10 @@ body{
 }
 
 .loser .img{
-    background-image: url(images/game-over.jpg);
+    background-image: url(../images/game-over.jpg);
     background-size: contain;
 }
 .winner .img{
-    background-image: url(images/winner.jpg);
+    background-image: url(../images/winner.jpg);
     background-size: contain;
 }
