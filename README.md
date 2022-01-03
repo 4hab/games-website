@@ -20,8 +20,8 @@ The game is about finding all bombs hidden in the board following the numbers on
 
 
 ## screenshots
-<img src='home-screenshot.png' width='50%'/>
-<img src='games.png'/>
+<img src='images/home-screenshot.png' width='50%'/>
+<img src='images/games.png'/>
 
 ## tools
  - HTML
