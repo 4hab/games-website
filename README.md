@@ -34,7 +34,7 @@ The game is about finding all bombs hidden in the board following the numbers on
 
  - Me (Shehab el-deen Abdullah)
  - Hossam Ramadan 
- - Mohammed Abu-elkasem
+ - Mohammed Abu-elkassem
  
 ## ToDo
  - Add more games
