@@ -1,11 +1,9 @@
 ## what is sigma
-**Sigma games** is a website that hosts some simple games
-where you can have some fun playing our awesome games,
+[**SIGMA games**](https://festive-perlman-02c89b.netlify.app/index.html) is a website that hosts some simple games
+where you can have some fun playing them.
 all the games are single player so you can play whenever you want and you don't have to wait anyone to play with you
 
 ## Our Games
-
- 
 
  1. **Minesweeper:** 
 The game is about finding all bombs hidden in the board following the numbers on the board, **you can learn more about how to play the game** [here](https://www.instructables.com/How-to-beat-Minesweeper/). The game has 3 levels:
@@ -18,8 +16,11 @@ The game is about finding all bombs hidden in the board following the numbers on
 > Minesweeper board is generated randomly so you can never expect where the bombs are except if you play with the game rules
 > Ghosts in pacman are also moving randomly 
 
+[go to SIGMA>>](https://festive-perlman-02c89b.netlify.app/index.html)
 
 ## screenshots
+**Watch the video for the website** [**here**](https://drive.google.com/file/d/1riX8Z257ruejn8X_18_DezJxH_88USnP/view?usp=sharing)
+
 <img src='images/home-screenshot.png' width='50%'/>
 <img src='images/games.png'/>
 
@@ -32,7 +33,7 @@ The game is about finding all bombs hidden in the board following the numbers on
 
  - Me (Shehab el-deen Abdullah)
  - Hossam Ramadan 
- - Mohammed Abu-elkasem
+ - Mohammed Abu-elkassem
  
 ## ToDo
  - Add more games
