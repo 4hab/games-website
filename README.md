@@ -1,5 +1,5 @@
 ## what is sigma
-[**SIGMA games**](https://kind-roentgen-2f79eb.netlify.app/) is a website that hosts some simple games
+[**SIGMA games**](https://sigma-games.netlify.app/) is a website that hosts some simple games
 where you can have some fun playing them.
 all the games are single player so you can play whenever you want and you don't have to wait anyone to play with you
 
@@ -16,7 +16,7 @@ The game is about finding all bombs hidden in the board following the numbers on
 > Minesweeper board is generated randomly so you can never expect where the bombs are except if you play with the game rules
 > Ghosts in pacman are also moving randomly 
 
-[go to SIGMA>>](https://kind-roentgen-2f79eb.netlify.app/)
+[go to SIGMA>>](https://sigma-games.netlify.app/)
 
 ## screenshots
 **Watch the video for the website** [**here**](https://drive.google.com/file/d/1riX8Z257ruejn8X_18_DezJxH_88USnP/view?usp=sharing)
